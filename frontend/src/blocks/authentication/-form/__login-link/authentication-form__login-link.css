@@ -1,0 +1,16 @@
+.authentication-form__login-link {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #FFFFFF;
+
+    padding: 0;
+    margin: 0;
+}
+
+.authentication-form__login-link:hover {
+    opacity: .8;
+}

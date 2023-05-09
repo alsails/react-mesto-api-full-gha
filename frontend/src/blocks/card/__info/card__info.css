@@ -1,0 +1,11 @@
+.card__info {
+  display: flex;
+  justify-content: space-between;
+  min-height: 79px;
+  max-width: 90%;
+
+  margin: 0 auto;
+
+}
+
+
