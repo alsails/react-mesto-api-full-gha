@@ -10,7 +10,7 @@ function EditAvatarPopup({ isOpened, onClose, onUpdateAvatar, status }) {
         if (isOpened) {
           setValues({});
         }
-      }, [isOpened]);
+      }, [isOpened, setValues]);
 
 
     function handleSubmit(e) {

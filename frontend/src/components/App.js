@@ -54,25 +54,24 @@ function App() {
   }, [isLoggedIn]);  
 
   useEffect(() => {
-    handleTokenCheck();
-  }, [])
-
-
-  const handleTokenCheck = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      auth.checkToken().then((res) => {
-        if (res) {
-          setLoggedIn(true);
-          setUserEmail(res.email)
-          navigate("/", { replace: true })
-        }
-      })
-        .catch(err => {
-          console.log(err);
-        });
+    function handleTokenCheck() {
+      const token = localStorage.getItem('token');
+      if (token) {
+        auth.checkToken().then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            setUserEmail(res.email)
+            navigate("/", { replace: true })
+          }
+        })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     }
-  }
+
+    handleTokenCheck();
+  }, [navigate])
 
   function handleLogin(email, password) {
     auth.signin(email, password)
@@ -207,7 +206,6 @@ function App() {
     Api
       .updateUserAvatar(avatar)
       .then((newInfo) => {
-        console.log('newInfo =>', newInfo)
         setCurrentUser(newInfo)
         closeAllPopups()
       })
