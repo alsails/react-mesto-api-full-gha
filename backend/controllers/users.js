@@ -7,6 +7,8 @@ const NotFound = require('../error/NotFound');
 const BadRequest = require('../error/BadRequest');
 const Conflict = require('../error/Conflict');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const { CastError, ValidationError } = mongoose.Error;
 
 function findUserById(id) {
@@ -108,7 +110,7 @@ module.exports.login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' });
       res.cookie('jwt', token, {
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 7),
         httpOnly: true,

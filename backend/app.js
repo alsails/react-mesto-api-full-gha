@@ -11,6 +11,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
+// eslint-disable-next-line consistent-return
 app.use((req, res, next) => {
   const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
