@@ -8,7 +8,7 @@ function checkResponse(res) {
 }
 
 function request(endpoint, options) {
-    return fetch(`/${endpoint}`, options).then(checkResponse)
+    return fetch(`/${endpoint}`, options).then(checkResponse).then(res => {return res.data})
 }
 
 export const signup = ({ password, email }) => {
@@ -31,8 +31,8 @@ export const signin = (email, password) => {
         body: JSON.stringify({ email, password })
     })
     .then((res) => {
-        if (res.data.jwt) {
-            localStorage.setItem('token', res.data.jwt);
+        if (res.jwt) {
+            localStorage.setItem('token', res.jwt);
         }
     })
 };

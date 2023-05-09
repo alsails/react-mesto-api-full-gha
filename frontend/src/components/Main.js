@@ -14,7 +14,6 @@ function Main({
 }) {
   const currentUser = useContext(CurrentUserContext);
 
-  console.log(cards)
   return (
     <main>
       <section className="profile">

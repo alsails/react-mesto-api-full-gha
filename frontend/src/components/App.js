@@ -64,7 +64,7 @@ function App() {
       auth.checkToken().then((res) => {
         if (res) {
           setLoggedIn(true);
-          setUserEmail(res.data.email)
+          setUserEmail(res.email)
           navigate("/", { replace: true })
         }
       })
@@ -207,6 +207,7 @@ function App() {
     Api
       .updateUserAvatar(avatar)
       .then((newInfo) => {
+        console.log('newInfo =>', newInfo)
         setCurrentUser(newInfo)
         closeAllPopups()
       })

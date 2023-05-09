@@ -84,7 +84,7 @@ function updateInfo(req, res, next) {
     .orFail(() => {
       throw new NotFound('Пользователь с указанным _id не найден');
     })
-    .then((user) => res.send(user))
+    .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.name instanceof ValidationError) {
         const errorMessage = Object.values(err.errors)

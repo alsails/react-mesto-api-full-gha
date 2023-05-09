@@ -14,7 +14,7 @@ class Api extends React.Component {
   }
 
   _request(endpoint, options) {
-    return fetch(`/${endpoint}`, options).then(this._checkResponse)
+    return fetch(`/${endpoint}`, options).then(this._checkResponse).then(res => {return res.data})
   }
 
   getInitialCards() {
@@ -22,7 +22,6 @@ class Api extends React.Component {
       method: 'GET',
       headers: this.headers
     })
-    .then(card => {console.log(card)})
   }
 
   getUserInfo() {
