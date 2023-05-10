@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+const cors = require('cors');
 require('dotenv').config();
 
 const { PORT, limiter } = require('./utils/config');
@@ -11,23 +12,9 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
-// eslint-disable-next-line consistent-return
-app.use((req, res, next) => {
-  const { method } = req;
-  const requestHeaders = req.headers['access-control-request-headers'];
+app.use(cors());
+app.options('*', cors());
 
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-  res.header('Access-Control-Allow-Origin', '*');
-
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-
-    return res.end();
-  }
-
-  next();
-});
 app.use(limiter);
 app.use(helmet({
   crossOriginResourcePolicy: false,
