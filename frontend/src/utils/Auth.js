@@ -1,4 +1,4 @@
-// const BASE_URL = 'http://127.0.0.1:3001';
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://api.mesto.for.photos.nomoredomains.monster' : 'http://localhost:3000';
 
 function checkResponse(res) {
     if (res.ok) {
@@ -8,7 +8,7 @@ function checkResponse(res) {
 }
 
 function request(endpoint, options) {
-    return fetch(`/${endpoint}`, options).then(checkResponse).then(res => {return res.data})
+    return fetch(`${BASE_URL}/${endpoint}`, options).then(checkResponse).then(res => {return res.data})
 }
 
 export const signup = ({ password, email }) => {

@@ -1,8 +1,9 @@
 import React from "react";
 
 class Api extends React.Component {
-  constructor({ headers }, props) {
+  constructor({ baseUrl, headers }, props) {
     super(props);
+    this.baseUrl = baseUrl;
     this.headers = headers;
   }
 
@@ -14,7 +15,7 @@ class Api extends React.Component {
   }
 
   _request(endpoint, options) {
-    return fetch(`/${endpoint}`, options).then(this._checkResponse).then(res => {return res.data})
+    return fetch(`${this.baseUrl}/${endpoint}`, options).then(this._checkResponse).then(res => {return res.data})
   }
 
   getInitialCards() {
@@ -86,6 +87,7 @@ class Api extends React.Component {
 }
 
 const api = new Api({
+  baseUrl: process.env.NODE_ENV === 'production' ? 'https://api.mesto.for.photos.nomoredomains.monster' : 'http://localhost:3000',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
