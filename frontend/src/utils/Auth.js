@@ -28,7 +28,8 @@ export const signin = (email, password) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        credentials: 'include',
+        body: JSON.stringify({ email, password }),
     })
     .then((res) => {
         if (res.jwt) {
@@ -43,7 +44,8 @@ export const checkToken = () => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-        }
+        },
+        credentials: 'include',
     })
         .then(data => { return data })
 }

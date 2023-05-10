@@ -109,18 +109,20 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
+
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' });
       res.cookie('jwt', token, {
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 7),
         httpOnly: true,
       });
-
       const userInfo = user.toObject();
       delete userInfo.password;
+
       res.send({
         data: req.cookies,
       });
     })
+
     .catch(next);
 };

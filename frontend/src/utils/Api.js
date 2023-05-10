@@ -15,20 +15,22 @@ class Api extends React.Component {
   }
 
   _request(endpoint, options) {
-    return fetch(`${this.baseUrl}/${endpoint}`, options).then(this._checkResponse).then(res => {return res.data})
+    return fetch(`${this.baseUrl}/${endpoint}`, options,).then(this._checkResponse).then(res => {return res.data})
   }
 
   getInitialCards() {
     return this._request(`cards`, {
       method: 'GET',
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include'
     })
   }
 
   getUserInfo() {
     return this._request(`users/me`, {
       method: 'GET',
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include',
     })
   }
 
@@ -38,7 +40,8 @@ class Api extends React.Component {
       body: JSON.stringify({
         avatar: data.avatar
       }),
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include',
     })
   }
 
@@ -49,7 +52,8 @@ class Api extends React.Component {
         name: data.name,
         about: data.about
       }),
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include',
     })
   }
 
@@ -60,28 +64,32 @@ class Api extends React.Component {
         name: data.name,
         link: data.link
       }),
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include'
     })
   }
 
   delCard(data) {
     return this._request(`cards/${data}`, {
       method: 'DELETE',
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include',
     })
   }
 
   delLike(data) {
     return this._request(`cards/${data}/likes`, {
       method: 'DELETE',
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include',
     })
   }
 
   putLike(data) {
     return this._request(`cards/${data}/likes`, {
       method: 'PUT',
-      headers: this.headers
+      headers: this.headers,
+      credentials: 'include',
     })
   }
 }

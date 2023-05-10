@@ -11,10 +11,20 @@ const handelError = require('./error/HandleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
+mongoose
+  .connect('mongodb://127.0.0.1/mestodb');
 
-app.use(cors());
-app.options('*', cors());
+// eslint-disable-next-line consistent-return
+app.use(cors({
+  origin: [
+    'http://localhost:3001',
+    'http://127.0.0.1',
+  ],
+  credentials: true,
+  exposedHeaders: ['set-cookie'],
+}));
 
+app.use(cookieParser());
 app.use(limiter);
 app.use(helmet({
   crossOriginResourcePolicy: false,
@@ -22,17 +32,11 @@ app.use(helmet({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose
-  .connect('mongodb://127.0.0.1/mestodb');
-
-app.use(cookieParser());
-
 app.use(requestLogger);
 
 app.use('/', require('./routes/index'));
 
 app.use(errorLogger);
-
 app.use(errors());
 
 app.use(handelError);
