@@ -19,6 +19,8 @@ app.use(cors({
   origin: [
     'http://localhost:3001',
     'http://127.0.0.1',
+    'http://mesto.for.photos.nomoredomains.monster',
+    'https://mesto.for.photos.nomoredomains.monster',
   ],
   credentials: true,
   exposedHeaders: ['set-cookie'],
