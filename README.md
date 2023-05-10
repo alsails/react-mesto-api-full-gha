@@ -45,7 +45,7 @@
 ------
 ## Ссылки на проект
 
-IP-адрес 158.160.22.203
+IP 158.160.22.203
 
 Frontend https://mesto.for.photos.nomoredomains.monster
 
