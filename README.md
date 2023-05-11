@@ -99,4 +99,4 @@ Backend https://api.mesto.for.photos.nomoredomains.monster
 
 После установки откройте терминал и введите команду `mongod`, если сервер не запустился, то воспользуйтесь командой `brew services start mongodb-community@4.4`
 
-После запуска backend, frontend и MongoDB, вы можете воспользоваться поллным функционалом проекта.
+После запуска backend, frontend и MongoDB, вы можете воспользоваться полным функционалом проекта.
