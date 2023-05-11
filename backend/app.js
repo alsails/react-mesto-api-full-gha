@@ -25,6 +25,7 @@ app.use(cors({
   credentials: true,
   exposedHeaders: ['set-cookie'],
 }));
+app.use(requestLogger);
 
 app.use(cookieParser());
 app.use(limiter);
@@ -33,8 +34,6 @@ app.use(helmet({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {

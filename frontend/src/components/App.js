@@ -29,6 +29,7 @@ function App() {
   const [cards, setCards] = useState([])
   const [isStatus, setIsStatus] = useState(false)
   const [isRegisterStatus, setIsRegisterStatus] = useState(true)
+  const [isLoginStatus, setIsLoginStatus] = useState(true)
   const [userEmail, setUserEmail] = useState("")
 
   const [isLoggedIn, setLoggedIn] = useState(false)
@@ -76,11 +77,15 @@ function App() {
   function handleLogin(email, password) {
     auth.signin(email, password)
     .then(() => {
+        setIsLoginStatus(true)
         setUserEmail(email)
         setLoggedIn(true)
         navigate('/')
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      setIsLoginStatus(false)
+      setIsInfoTooltip(true)
+    })
   }
 
   function handleRegister(formValue) {
@@ -284,7 +289,8 @@ function App() {
           <InfoTooltip
             isOpen={isInfoTooltip}
             onClose={closeAllPopups}
-            status={isRegisterStatus}
+            statusRegister ={isRegisterStatus}
+            statusLogin = {isLoginStatus}
           />
 
           <EditProfilePopup
